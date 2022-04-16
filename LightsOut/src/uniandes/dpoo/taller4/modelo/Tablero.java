@@ -183,7 +183,6 @@ public class Tablero
 	{
 		int tam = tablero.length;
 		int factorDificultad = tam * tam;
-
 		return factorDificultad - jugadas;
 	}
 }
