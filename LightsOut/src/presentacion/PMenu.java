@@ -113,10 +113,4 @@ public class PMenu extends JPanel{
 		
 		this.setBackground(Color.ORANGE);
 	}
-	
-	public static void main(String[] args) {
-		PMenu menu = new PMenu();
-		menu.getTamanio();
-		menu.getDificultad();
-	}
 }

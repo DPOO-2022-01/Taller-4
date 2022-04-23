@@ -22,7 +22,6 @@ public class PLightsOut extends JPanel{
 	//Tablero contiene la matriz y las jugadass
 	private BufferedImage luz;
 	private PMenu menu;
-	private JButton probando;
 	private FramePrincipal fPrincipal;
 		
 	
@@ -88,12 +87,6 @@ public class PLightsOut extends JPanel{
 				}
 			}
 		}
-	}
-	
-	public void pruebaEnlace() {
-		System.out.println("Estoy en LightsOut y la dificultad es: " + menu.getDificultad());
-		System.out.println("Estoy en LightsOut y el tamaño es: " + menu.getTamanio());
-		System.out.println("Probando tablero en LightsOut: " + fPrincipal.getTablero().tableroIluminado());
 	}
 
 	public void tomarPosicion(MouseEvent e) {
