@@ -73,7 +73,6 @@ public class PMenu extends JPanel{
 			String strTamanio = selected.toString();
 			String[] splitTamanio = strTamanio.split("x");
 			tamanio = Integer.parseInt(splitTamanio[0]);
-			System.out.println("Selected Item  = " + tamanio);
 			
 		});
 		
@@ -84,9 +83,7 @@ public class PMenu extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Este es el fácil en Pmenu");
 				dificultad = 5*1;
-				System.out.println(getDificultad());
 			}
 		});
 		
@@ -95,8 +92,6 @@ public class PMenu extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dificultad = 5*2;
-				System.out.println("Este es el medio en PMenu");
-				System.out.println(getDificultad());
 			}
 		});
 		
@@ -105,10 +100,6 @@ public class PMenu extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dificultad = 5*3;
-				System.out.println("Este es el difícil en PMenu");
-				System.out.println(getDificultad());
-				
-				
 			}
 		});
 		

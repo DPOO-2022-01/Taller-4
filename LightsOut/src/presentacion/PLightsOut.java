@@ -5,12 +5,15 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import uniandes.dpoo.taller4.modelo.Tablero;
@@ -27,11 +30,6 @@ public class PLightsOut extends JPanel{
 		this.menu = menu;
 		this.fPrincipal = fPrincipal;
 		this.setLayout(new GridLayout());
-		//Obtiene el tamaño  y la dificultad del JComboBox
-		
-		//Inicia el tablero con el tamaño seleccionado
-		
-		
 		//Inicializa la imagen
 		try {
 			luz = ImageIO.read(getClass().getResourceAsStream("/luz.png"));
@@ -39,41 +37,56 @@ public class PLightsOut extends JPanel{
 			e.printStackTrace();
 		}	
 		repaint();
-		probando = new JButton("Probando");
-		probando.addActionListener(new ActionListener() {
+
+		addMouseListener(new MouseListener() {
+			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				pruebaEnlace();		
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				tomarPosicion(e);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
-		
-		//Prueba de conexión entre objetos
-		this.add(probando);
+
 		
 	}
 	
-	//Forma en la que se hará la matriz de imagenes
-//	public String verTablero() {
-//		String grid = "";
-//		boolean[][] table = tablero.darTablero(); 
-//		for (int i = 0; i < table.length; i++) {
-//			for (int j = 0; j < table[i].length; j++) {
-//				if(table[i][j]) {
-//					grid += "ON-";
-//				} else {
-//					grid += "OFF-";
-//				}
-//			}
-//			grid += "\n";
-//		}
-//		return grid;
-//	}
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(luz, 0, 0, luz.getWidth()*2,luz.getHeight()*2 , Color.YELLOW, null);
 		int n = menu.getTamanio();
-		for (int i = 0; i < n; i++) {
-			
+		boolean[][] gameBoard = fPrincipal.getTablero().darTablero();
+		for (int i = 0; i < gameBoard.length; i++) {
+			for (int j = 0; j < gameBoard[i].length; j++) {
+				if(gameBoard[i][j]) {
+					//Filas y columnas
+					g.drawImage(luz, i * this.getWidth()/n, j * this.getHeight()/n, this.getWidth()/n, this.getHeight()/n, Color.YELLOW, null);
+				} else {
+					g.drawImage(luz, i * this.getWidth()/n, j * this.getHeight()/n, this.getWidth()/n, this.getHeight()/n, Color.LIGHT_GRAY, null);
+				}
+			}
 		}
 	}
 	
@@ -81,6 +94,16 @@ public class PLightsOut extends JPanel{
 		System.out.println("Estoy en LightsOut y la dificultad es: " + menu.getDificultad());
 		System.out.println("Estoy en LightsOut y el tamaño es: " + menu.getTamanio());
 		System.out.println("Probando tablero en LightsOut: " + fPrincipal.getTablero().tableroIluminado());
+	}
+
+	public void tomarPosicion(MouseEvent e) {
+		int fila = e.getY()/(this.getHeight()/menu.getTamanio());
+		int columna = e.getX()/(this.getWidth()/menu.getTamanio());
+		fPrincipal.getTablero().jugar(columna, fila);
+		if (fPrincipal.getTablero().tableroIluminado()) {
+			JOptionPane.showMessageDialog(this, "¡Ganaste!");
+		}
+		repaint();
 	}
 
 }
